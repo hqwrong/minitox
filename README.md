@@ -8,11 +8,11 @@
 
 1. Single-File and Small Codebase(Only 1.2k LOC);
 
-2. Totaly Standalone ( No 3rd libary needed, only rely on Tox Lib and System&Stardard C Lib);
+2. Totaly Standalone(No 3rd libary needed, only rely on toxcore and system c lib);
 
 3. Covered most apis of Friend&Group, and more to go;
 
-4. Fun to play with.(Colored text, Async REPL, e.t.c).
+4. Fun to play with(Colored text, Async REPL, e.t.c).
 
 ## Build
 
