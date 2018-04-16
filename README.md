@@ -1,6 +1,6 @@
-![minitox](https://raw.github.com/hqwrong/minitox/master/minitox.jpeg "minitox")
+# MiniTox
 
-# minitox
+![minitox](https://raw.github.com/hqwrong/minitox/master/minitox.jpeg "minitox")
 
 `minitox` is a minimal client written for [toxcore](https://github.com/TokTok/c-toxcore).  It's an example of tox client implementation and also a toy which new developers came to this project can play and start with, therefore getting familiar with tox project.
 
