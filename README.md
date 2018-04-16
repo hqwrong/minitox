@@ -1,6 +1,8 @@
-# mtox
+![minitox](https://raw.github.com/hqwrong/minitox/master/minitox.jpeg "minitox")
 
-`mtox` is a minimal client written for [toxcore](https://github.com/TokTok/c-toxcore).  It's an example of tox client implementation and also a toy which new developers come to this project can play and start with, therefore getting familiar with this project.
+# minitox
+
+`minitox` is a minimal client written for [toxcore](https://github.com/TokTok/c-toxcore).  It's an example of tox client implementation and also a toy which new developers come to this project can play and start with, therefore getting familiar with this project.
 
 ## Features
 
@@ -16,4 +18,4 @@
 
 The only lib required is libtoxcore:
 
-> gcc -o mtox mtox.c -ltoxcore
+> gcc -o minitox minitox.c -ltoxcore
