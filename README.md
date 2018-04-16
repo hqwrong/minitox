@@ -6,9 +6,9 @@
 
 ## Features
 
-1. Single-File and Small Codebase(Only 1.2k LOC);
+1. Single File and Small Codebase;
 
-2. Totaly Standalone(No 3rd libary needed, only rely on toxcore and system c lib);
+2. Totally Standalone(No 3rd libary needed, only rely on toxcore and system c lib);
 
 3. Covered most apis of Friend&Group, and more to go;
 
