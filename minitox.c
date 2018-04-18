@@ -13,7 +13,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-#include "../toxcore/tox.h"
+#include <tox.h>
 
 /*******************************************************************************
  *
