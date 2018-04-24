@@ -18,4 +18,5 @@
 
 The only lib required is [toxcore](https://github.com/TokTok/c-toxcore):
 
-> gcc -o minitox minitox.c -ltoxcore
+> gcc -o minitox -I <TOX_H_DIR> minitox.c -L <TOX_LIB_DIR> -ltoxcore
+
