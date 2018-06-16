@@ -1315,7 +1315,14 @@ void repl_iterate(){
 }
 
 
-int main() {
+int main(int argc, char **argv) {
+    if (argc == 2 && strcmp(argv[1], "--help") == 0) {
+        fputs("Usage: minitox\n", stdout);
+        fputs("\n", stdout);
+        fputs("Minitox does not take any arguments.\n", stdout);
+        return 0;
+    }
+
     fputs("Type `/guide` to print the guide.\n", stdout);
     fputs("Type `/help` to print command list.\n\n",stdout);
 
