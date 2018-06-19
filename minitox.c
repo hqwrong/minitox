@@ -13,7 +13,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-#include <tox.h>
+#include <tox/tox.h>
 
 /*******************************************************************************
  *
@@ -32,10 +32,10 @@ struct DHT_node {
     const char key_hex[TOX_PUBLIC_KEY_SIZE*2 + 1];
 };
 
-struct DHT_node bootstrap_nodes[] = {       
+struct DHT_node bootstrap_nodes[] = {
 
     // Setup tox bootrap nodes
-    
+
     {"node.tox.biribiri.org",      33445, "F404ABAA1C99A9D37D61AB54898F56793E1DEF8BD46B1038B9D822E8460FAB67"},
     {"128.199.199.197",            33445, "B05C8869DBB4EDDD308F43C1A974A20A725A36EACCA123862FDE9945BF9D3E09"},
     {"2400:6180:0:d0::17a:a001",   33445, "B05C8869DBB4EDDD308F43C1A974A20A725A36EACCA123862FDE9945BF9D3E09"},
@@ -54,7 +54,7 @@ struct DHT_node bootstrap_nodes[] = {
 
 /// Macros for terminal display
 
-#define CODE_ERASE_LINE    "\r\033[2K" 
+#define CODE_ERASE_LINE    "\r\033[2K"
 
 #define RESET_COLOR        "\x01b[0m"
 #define SELF_TALK_COLOR    "\x01b[35m"  // magenta
@@ -267,7 +267,7 @@ bool delfriend(uint32_t friend_num) {
         *p = f->next;
         if (f->name) free(f->name);
         if (f->status_message) free(f->status_message);
-        while (f->hist) { 
+        while (f->hist) {
             struct ChatHist *tmp = f->hist;
             f->hist = f->hist->next;
             free(tmp);
@@ -296,7 +296,7 @@ bool delgroup(uint32_t group_num) {
         *p = cf->next;
         if (cf->peers) free(cf->peers);
         if (cf->title) free(cf->title);
-        while (cf->hist) { 
+        while (cf->hist) {
             struct ChatHist *tmp = cf->hist;
             cf->hist = cf->hist->next;
             free(tmp);
@@ -387,7 +387,7 @@ void setup_arepl() {
     async_repl->prompt = malloc(LINE_MAX_SIZE);
 
     strcpy(async_repl->prompt, CMD_PROMPT);
-    
+
     // stdin and stdout may share the same file obj,
     // reopen stdin to avoid accidentally getting stdout modified.
 
@@ -767,12 +767,12 @@ void bootstrap()
 
 void setup_tox()
 {
-    create_tox(); 
+    create_tox();
     init_friends();
     bootstrap();
 
     ////// register callbacks
-    
+
     // self
     tox_callback_self_connection_status(tox, self_connection_status_cb);
 
@@ -780,7 +780,7 @@ void setup_tox()
     tox_callback_friend_request(tox, friend_request_cb);
     tox_callback_friend_message(tox, friend_message_cb);
     tox_callback_friend_name(tox, friend_name_cb);
-    tox_callback_friend_status_message(tox, friend_status_message_cb); 
+    tox_callback_friend_status_message(tox, friend_status_message_cb);
     tox_callback_friend_connection_status(tox, friend_connection_status_cb);
 
     // group
@@ -804,7 +804,7 @@ void command_guide(int narg, char **args) {
     PRINT("As it pursued simplicity at the cost of robustness and efficiency,");
     PRINT("It should only be used for learning or playing with, instead of daily use.\n");
 
-    PRINT("Commands are any input lines with leading `/`,"); 
+    PRINT("Commands are any input lines with leading `/`,");
     PRINT("Command args are seprated by blanks,");
     PRINT("while some special commands may accept any-character string, like `/setname` and `/setstmsg`.\n");
 
@@ -1110,7 +1110,7 @@ void command_settitle(int narg, char **args) {
         ERROR("! Invalid group contact index");
         return;
     }
-    
+
     char *title = args[1];
     size_t len = strlen(title);
     TOX_ERR_CONFERENCE_TITLE  err;
@@ -1293,7 +1293,7 @@ void repl_iterate(){
                 if (cmd) {
                     char *tokens[cmd->narg];
                     int ntok = 0;
-                    for (; l != NULL && ntok != cmd->narg; ntok++) {  
+                    for (; l != NULL && ntok != cmd->narg; ntok++) {
                         // if it's the last arg, then take the rest line.
                         char *tok = (ntok == cmd->narg - 1) ? l : poptok(&l);
                         tokens[ntok] = tok;
@@ -1315,7 +1315,14 @@ void repl_iterate(){
 }
 
 
-int main() {
+int main(int argc, char **argv) {
+    if (argc == 2 && strcmp(argv[1], "--help") == 0) {
+        fputs("Usage: minitox\n", stdout);
+        fputs("\n", stdout);
+        fputs("Minitox does not take any arguments.\n", stdout);
+        return 0;
+    }
+
     fputs("Type `/guide` to print the guide.\n", stdout);
     fputs("Type `/help` to print command list.\n\n",stdout);
 
