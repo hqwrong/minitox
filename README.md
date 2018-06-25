@@ -16,8 +16,20 @@ start with, therefore getting familiar with the project.
 
 ## Build
 
-The only lib required is [toxcore](https://github.com/TokTok/c-toxcore):
+If [toxcore](https://github.com/TokTok/c-toxcore) has been installed into system path, Use
 
 ```sh
-$ gcc -o minitox minitox.c -I $TOX_H_DIR -L $TOX_LIB_DIR -Wl,-rpath $TOX_LIB_DIR -ltoxcore
+make
 ```
+
+Or link it manually (assume libtoxcore.so in TOX\_LIB\_DIR, tox.h in TOX\_H\_DIR/tox):
+
+```sh
+$ gcc -o minitox minitox.c -I TOX_H_DIR -L TOX_LIB_DIR -Wl,-rpath $TOX_LIB_DIR -ltoxcore
+```
+
+## Config
+
+To keep simple, `minitox` does not provid command line options,except for `-h` and `--help`.
+To change its behaviour, you are encouraged to modify the source file and rebuild. The source
+file has been heavily commented.
