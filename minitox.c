@@ -205,6 +205,7 @@ char* genmsg(struct ChatHist **pp, const char *fmt, ...) {
     va_list va2;
     va_copy(va2, va);
     size_t len = vsnprintf(NULL, 0, fmt, va2);
+    va_end(va2);
 
     struct ChatHist *h = malloc(sizeof(struct ChatHist));
     h->prev = NULL;
@@ -213,9 +214,8 @@ char* genmsg(struct ChatHist **pp, const char *fmt, ...) {
     *pp = h;
     h->msg = malloc(len+1);
 
-    va_list va3;
-    va_copy(va3, va);
-    vsnprintf(h->msg, len+1, fmt, va3);
+    vsnprintf(h->msg, len+1, fmt, va);
+    va_end(va);
 
     return h->msg;
 }
