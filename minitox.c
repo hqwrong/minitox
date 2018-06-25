@@ -41,7 +41,7 @@ struct DHT_node bootstrap_nodes[] = {
     {"2400:6180:0:d0::17a:a001",   33445, "B05C8869DBB4EDDD308F43C1A974A20A725A36EACCA123862FDE9945BF9D3E09"},
 };
 
-#define LINE_MAX_SIZE 11512  // If input line's length surpassed this value, it will be truncated.
+#define LINE_MAX_SIZE 512  // If input line's length surpassed this value, it will be truncated.
 
 #define PORT_RANGE_START 33445     // tox listen port range
 #define PORT_RANGE_END   34445
@@ -1279,6 +1279,7 @@ void repl_iterate(){
             }
 
             PRINT(CMD_MSG_PREFIX "%s", line);  // take this input line as a command.
+            if (len == 0) continue; // continue to for_1.  ignore empty line
 
             if (line[0] == '/') {
                 char *l = line + 1; // skip leading '/'
