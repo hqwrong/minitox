@@ -25,7 +25,7 @@ make
 Or link it manually (assume libtoxcore.so in TOX\_LIB\_DIR, tox.h in TOX\_H\_DIR/tox):
 
 ```sh
-$ gcc -o minitox minitox.c -I TOX_H_DIR -L TOX_LIB_DIR -Wl,-rpath $TOX_LIB_DIR -ltoxcore
+$ gcc -o minitox minitox.c -I TOX_H_DIR -L TOX_LIB_DIR -Wl,-rpath TOX_LIB_DIR -ltoxcore
 ```
 
 ## Config
