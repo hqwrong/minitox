@@ -593,7 +593,8 @@ void group_invite_cb(Tox *tox, uint32_t friend_num, TOX_CONFERENCE_TYPE type, co
         memcpy(req->userdata.group.cookie, cookie, length),
         req->userdata.group.length = length;
         req->userdata.group.friend_num = friend_num;
-        req->msg = malloc(strlen("From ") + strlen(f->name) + 1);
+        int sz = snprintf(NULL, 0, "%s%s", "From ", f->name);
+        req->msg = malloc(sz + 1);
         sprintf(req->msg, "%s%s", "From ", f->name);
     }
 }
