@@ -2,6 +2,10 @@
  * MiniTox - A minimal client for Tox
  */
 
+#ifndef _POSIX_C_SOURCE
+#define _POSIX_C_SOURCE 200809L
+#endif
+
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -1342,7 +1346,11 @@ int main(int argc, char **argv) {
         tox_iterate(tox, NULL);
         uint32_t v = tox_iteration_interval(tox);
         msecs += v;
-        usleep(v * 1000);
+
+        struct timespec pause;
+        pause.tv_sec = 0;
+        pause.tv_nsec = v * 1000 * 1000;
+        nanosleep(&pause, NULL);
     }
 
     return 0;
