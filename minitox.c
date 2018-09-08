@@ -220,7 +220,7 @@ char* genmsg(struct ChatHist **pp, const char *fmt, ...) {
     return h->msg;
 }
 
-char* getftime() {
+char* getftime(void) {
     static char timebuf[64];
 
     time_t tt = time(NULL);
@@ -334,7 +334,7 @@ char *bin2hex(const uint8_t *bin, size_t length) {
     return saved;
 }
 
-struct ChatHist ** get_current_histp() {
+struct ChatHist ** get_current_histp(void) {
     if (TalkingTo == TALK_TYPE_NULL) return NULL;
     uint32_t num = INDEX_TO_NUM(TalkingTo);
     switch (INDEX_TO_TYPE(TalkingTo)) {
@@ -370,11 +370,11 @@ struct termios saved_tattr;
 
 struct AsyncREPL *async_repl;
 
-void arepl_exit() {
+void arepl_exit(void) {
     tcsetattr(NEW_STDIN_FILENO, TCSAFLUSH, &saved_tattr);
 }
 
-void setup_arepl() {
+void setup_arepl(void) {
     if (!(isatty(STDIN_FILENO) && isatty(STDOUT_FILENO))) {
         fputs("! stdout & stdin should be connected to tty", stderr);
         exit(1);
@@ -674,7 +674,7 @@ void group_peer_name_cb(Tox *tox, uint32_t group_num, uint32_t peer_num, const u
  *
  ******************************************************************************/
 
-void create_tox()
+void create_tox(void)
 {
     struct Tox_Options *options = tox_options_new(NULL);
     tox_options_set_start_port(options, PORT_RANGE_START);
@@ -704,7 +704,7 @@ void create_tox()
     tox_options_free(options);
 }
 
-void init_friends() {
+void init_friends(void) {
     size_t sz = tox_self_get_friend_list_size(tox);
     uint32_t *friend_list = malloc(sizeof(uint32_t) * sz);
     tox_self_get_friend_list(tox, friend_list);
@@ -740,7 +740,7 @@ void init_friends() {
     tox_self_get_public_key(tox, self.pubkey);
 }
 
-void update_savedata_file()
+void update_savedata_file(void)
 {
     if (!(savedata_filename && savedata_tmp_filename)) return;
 
@@ -757,7 +757,7 @@ void update_savedata_file()
     free(savedata);
 }
 
-void bootstrap()
+void bootstrap(void)
 {
     for (size_t i = 0; i < sizeof(bootstrap_nodes)/sizeof(struct DHT_node); i ++) {
         uint8_t *bin = hex2bin(bootstrap_nodes[i].key_hex);
@@ -766,7 +766,7 @@ void bootstrap()
     }
 }
 
-void setup_tox()
+void setup_tox(void)
 {
     create_tox();
     init_friends();
@@ -1244,7 +1244,7 @@ char *poptok(char **strp) {
     return save;
 }
 
-void repl_iterate(){
+void repl_iterate(void){
     static char buf[128];
     static char line[LINE_MAX_SIZE];
     while (1) {
